@@ -1,5 +1,12 @@
 var read = require('read');
 
+var User = function (id, name, points) {
+  this.id = id;
+  this.name = name;
+  this.current_question_id = null;
+  this.points = points;
+}
+
 var Question = function (id, text, answer, points){
   this.id = id;
   this.text = text;
@@ -13,7 +20,7 @@ var Quiz = function (player, questions) {
   this.current_question = this.questions.shift();
   this.game_over = false;
   this.total = 0;
-  this.bonus_id = Math.floor(Math.random()*questions.length);
+  this.bonus_id = (Math.floor(Math.random()*questions.length))+1;
 
   this.add_question = function (question) {
     this.questions.push(question);
@@ -71,13 +78,17 @@ var Quiz = function (player, questions) {
       }
     }
   }
+
+  this.greeting = function() {
+
+  }
 }
 
 var q1 = new Question(1, "Es esto una pregunta?", "Si", 45);
 var q2 = new Question(2, "Es esto otra pregunta?", "No", 45);
 var q3 = new Question(3, "De que color es el caballo blanco de Bolivar?", "Blanco", 15);
 var quiz = new Quiz("R", [q1, q2, q3]);
-
+quiz.greeting();
 quiz.ask();
 
 
